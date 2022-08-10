@@ -1,0 +1,126 @@
+{
+    "name": "dbs-frontend",
+    "version": "0.1.0",
+    "license": "MIT",
+    "private": true,
+    "homepage": ".",
+    "scripts": {
+        "start": "react-app-rewired start",
+        "start:dev": "export $(cat .env.dev | xargs) && NODE_ENV=production yarn start",
+        "start:stg": "export $(cat .env.stg | xargs) && NODE_ENV=production yarn start",
+        "start:prod": "export $(cat .env.prod | xargs) && NODE_ENV=production yarn start",
+        "prebuild": "rimraf build",
+        "build": "react-app-rewired build && tsc --project tsconfig.server.json",
+        "build:dev": "env-cmd -f .env.dev yarn build",
+        "build:stg": "env-cmd -f .env.stg yarn build",
+        "build:prod": "env-cmd -f .env.prod yarn build",
+        "preci": "rm -fr node_modules",
+        "ci": "yarn install --frozen-lockfile",
+        "test": "jest --passWithNoTests",
+        "test:watch": "yarn test --watch",
+        "test:coverage": "yarn test --coverage",
+        "eject": "react-scripts eject",
+        "format": "yarn format:eslint && yarn format:prettier",
+        "format:eslint": "eslint --fix \"**/*\"",
+        "format:prettier": "prettier --write \"**/*\"",
+        "lint": "yarn lint:eslint && yarn lint:prettier && yarn lint:tsc",
+        "lint:eslint": "eslint \"**/*\"",
+        "lint:prettier": "prettier --check \"**/*\"",
+        "lint:tsc": "tsc --project ."
+    },
+    "dependencies": {
+        "@fontsource/poppins": "^4.4.2",
+        "@hookform/resolvers": "^1.3.7",
+        "@material-ui/core": "^4.11.2",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "^4.0.0-alpha.58",
+        "@types/react-date-range": "^1.4.3",
+        "date-fns": "^2.28.0",
+        "i18next-browser-languagedetector": "^6.0.1",
+        "i18next-xhr-backend": "^3.2.2",
+        "react": "^17.0.2",
+        "react-date-range": "^1.4.0",
+        "react-dom": "^17.0.2",
+        "react-hook-form": "^6.15.5",
+        "react-i18next": "^11.8.8",
+        "react-redux": "^7.2.2",
+        "react-router-dom": "^5.2.0",
+        "recharts": "^2.1.9",
+        "redux": "^4.0.5",
+        "socket.io-client": "2.3.1",
+        "yup": "^0.32.9"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "@types/i18next": "^13.0.0",
+        "@types/jest": "^26.0.15",
+        "@types/node": "^12.0.0",
+        "@types/react": "^16.9.53",
+        "@types/react-dom": "^17.0.0",
+        "@types/react-i18next": "^8.1.0",
+        "@types/react-redux": "^7.1.15",
+        "@types/react-router-dom": "^5.1.7",
+        "@types/redux": "^3.6.0",
+        "@types/redux-logger": "^3.0.8",
+        "@types/socket.io-client": "^3.0.0",
+        "@typescript-eslint/eslint-plugin": "^4.20.0",
+        "@typescript-eslint/parser": "^4.14.2",
+        "babel-eslint": "^10.1.0",
+        "env-cmd": "^10.1.0",
+        "eslint-config-airbnb": "18.2.1",
+        "eslint-config-airbnb-typescript": "6.3.2",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-import-resolver-typescript": "^2.4.0",
+        "eslint-plugin-flowtype": "^5.2.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jest": "^24.1.3",
+        "eslint-plugin-json": "^2.1.2",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "eslint-plugin-testing-library": "^3.10.1",
+        "husky": "^4.3.8",
+        "lint-staged": "^10.5.3",
+        "prettier": "^2.2.1",
+        "react-app-rewire-alias": "^1.0.3",
+        "react-app-rewired": "^2.1.8",
+        "react-scripts": "4.0.2",
+        "redux-logger": "^3.0.6",
+        "typescript": "^4.1.3",
+        "web-vitals": "^1.1.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "tsc --noEmit && yarn test && lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*": [
+            "yarn format",
+            "git add"
+        ]
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

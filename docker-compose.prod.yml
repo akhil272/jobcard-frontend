@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    app:
+        container_name: dbs-frontend
+        build:
+            context: .
+            args:
+                - STAGE=prod
+            dockerfile: Dockerfile
+        ports:
+            - '8000:80'
